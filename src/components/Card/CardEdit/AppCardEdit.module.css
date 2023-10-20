@@ -8,6 +8,10 @@
     margin: 20px auto;
 }
 
+.card.cardDelete {
+animation: deleteCard 0.7s ease-in-out;
+}
+
 .deleteIcon {
     position: absolute;
     right: 0;
@@ -64,4 +68,15 @@
 .nextSaveBtn {
     color: var(--white);
     background-color: var(--accent);
+}
+
+@keyframes deleteCard {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0.1);
+        opacity: 0;
+    }
 }

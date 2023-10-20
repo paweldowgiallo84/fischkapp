@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { CardData } from "../../../App"
 import styles from './AppCardEdit.module.css'
 import deleteIcon from '../../../images/deleteIcon.svg'
@@ -7,7 +7,7 @@ interface AppCardEdtiProps {
     index: number;
     id: number
     cards: CardData[];
-    stopEditMode: () => void;    
+    stopEditMode: () => void;
     setCards: (cards: CardData[]) => void
 }
 
@@ -16,16 +16,17 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, id, index, stop
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
     const [errorMsg, setErrorMsg] = useState<string>('')
+    const [isDeleting, setIsDeleting] = useState<boolean>(false)
 
     const flipCardSide = (cardState: boolean) => {
         setFrontSide(cardState)
     }
 
-    const EditCardData = (id: number) => {
+    const editCardData = (id: number) => {
         if (question === '' || answer === '') { setErrorMsg('Błędnie wypełniona fiszka... popraw dane.') }
         else {
             setErrorMsg('')
-            const editCard = { cardQuestion: question, cardAnswer: answer }
+            // const editCard = { cardQuestion: question, cardAnswer: answer }
             const newCards = cards.map((card) => {
                 if (card.id === id) return {
                     ...card, cardQuestion: question, cardAnswer: answer
@@ -37,9 +38,18 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, id, index, stop
             setErrorMsg('')
             stopEditMode()
         }
+    } 
+    const deleteCardData = (id: number) => {
+            setIsDeleting(true)
+            setTimeout(() => {
+                const newCards = cards.filter(card => card.id !== id)
+                setCards(newCards)
+                setIsDeleting(false)
+                stopEditMode()
+            }, 600)
+        
 
     }
-
 
     return (
         <>
@@ -55,15 +65,15 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, id, index, stop
 
                 :
 
-                <div className={`${styles.card} ${frontSide ? styles.flip : ''}`}>
-                    <img src={deleteIcon} className={styles.deleteIcon} alt="deleteIcon" />
+                <div className={`${styles.card} ${frontSide ? styles.flip : ''} ${!isDeleting ? '' : styles.cardDelete}`}>
+                    <img src={deleteIcon} className={styles.deleteIcon} alt="deleteIcon" onClick={() => deleteCardData(id)} />
                     <p className={styles.questionValue}>{question}</p>
                     <input type="text" className={styles.cardInput} id='inputAnswer' placeholder={answer || cards[index].cardAnswer}
                         onChange={e => setAnswer(e.target.value)} value={answer} />
                     <p className={styles.errorMsg}>{errorMsg}</p>
                     <div className={styles.cardBtns}>
                         <button className={styles.cancelBackBtn} onClick={() => flipCardSide(true)}>Back</button>
-                        <button className={styles.nextSaveBtn} onClick={() => EditCardData(id)}>Save</button>
+                        <button className={styles.nextSaveBtn} onClick={() => editCardData(id)}>Save</button>
                     </div>
                 </div>
             }
