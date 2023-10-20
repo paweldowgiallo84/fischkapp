@@ -22,7 +22,7 @@ export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, se
   const addCardData = () => {
     if (question === '' || answer === '') { setErrorMsg('Błędnie wypełniona fiszka... popraw dane.') }
     else {
-      const newCard = { cardId: cards.length + 1, cardQuestion: question, cardAnswer: answer }
+      const newCard = {id: cards.length, cardQuestion: question, cardAnswer: answer }
       const newCards = [...cards, newCard]
       setCards(newCards)
       setQuestion('')

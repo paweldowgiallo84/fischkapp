@@ -1,27 +1,31 @@
-import React from 'react'
-import editIcon from '../../images/editIcon.svg'
-import styles from './AppCard.module.css'
-import { CardData } from '../../App'
+import React, { useState } from "react"
+import { CardData } from "../../App"
+import { AppCardNormal } from "./CardNormal/AppCardNormal"
 
 interface AppCardProps {
-  cards: CardData[]
+    id: number;
+    question: string;
+    answer: string;
+    index: number;
+    key: number;
+    cards: CardData[];
+    setCards: (cards: CardData[]) => void;
 }
 
-export const AppCard: React.FC<AppCardProps> = ({ cards }) => {
+export const AppCard: React.FC<AppCardProps> = ({id, question, answer, index, key, cards, setCards, }) => {
+    const [editMode, setEditMode] = useState<boolean>(false) 
 
-  return (
-    <>
-      {cards.length === 0 ?
-        <p className='emptyCard'>Add your first flashcard</p>  :
-       cards.map((fischk: CardData) => {
-        return (
-          <div className={styles.card} key={fischk.cardId}>
-            <img src={editIcon} className={styles.editIcon} alt="edit icon" />
-            <p className={styles.cardContent}>{fischk.cardQuestion}</p>
-          </div>
-        )
-       })
-      }
-    </>
-  )
+    return (
+        <>
+            {!editMode &&
+                <AppCardNormal 
+                id={id}
+                question={question}
+                answer={answer}
+                index={index}
+                cards={cards} 
+                runEditMode={() => setEditMode(true)} />
+            }           
+        </>
+    )
 }
