@@ -22,8 +22,7 @@ export const AppCard: React.FC<AppCardProps> = ({id, question, answer, index, ke
                 question={question}
                 answer={answer}
                 index={index}
-                cards={cards}/>
-                     
+                cards={cards}/>                     
         </>
     )
 }

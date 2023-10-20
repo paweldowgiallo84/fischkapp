@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import deleteIcon from '../../images/deleteIcon.svg'
 import styles from './AppAddCard.module.css'
 import { CardData } from '../../App'
-import { number } from 'prop-types';
 
 interface AppAddCardProps {
   cancelAddCard: () => void;
