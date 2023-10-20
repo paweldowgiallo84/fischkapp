@@ -32,6 +32,7 @@ export const AppCard: React.FC<AppCardProps> = ({id, question, answer, index, ke
             }
             {editMode && 
             <AppCardEdit
+            id={id}
             index={index}
             setCards={setCards} 
             cards={cards}

@@ -5,12 +5,13 @@ import deleteIcon from '../../../images/deleteIcon.svg'
 
 interface AppCardEdtiProps {
     index: number;
+    id: number
     cards: CardData[];
     stopEditMode: () => void;    
     setCards: (cards: CardData[]) => void
 }
 
-export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, index, stopEditMode, setCards }) => {
+export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, id, index, stopEditMode, setCards }) => {
     const [frontSide, setFrontSide] = useState<boolean>(true)
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
@@ -20,13 +21,13 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, index, stopEdit
         setFrontSide(cardState)
     }
 
-    const EditCardData = () => {
+    const EditCardData = (id: number) => {
         if (question === '' || answer === '') { setErrorMsg('Błędnie wypełniona fiszka... popraw dane.') }
         else {
             setErrorMsg('')
             const editCard = { cardQuestion: question, cardAnswer: answer }
             const newCards = cards.map((card) => {
-                if (card.id === index) return {
+                if (card.id === id) return {
                     ...card, cardQuestion: question, cardAnswer: answer
                 }; else return card
             })
@@ -62,7 +63,7 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, index, stopEdit
                     <p className={styles.errorMsg}>{errorMsg}</p>
                     <div className={styles.cardBtns}>
                         <button className={styles.cancelBackBtn} onClick={() => flipCardSide(true)}>Back</button>
-                        <button className={styles.nextSaveBtn} onClick={() => EditCardData()}>Save</button>
+                        <button className={styles.nextSaveBtn} onClick={() => EditCardData(id)}>Save</button>
                     </div>
                 </div>
             }
