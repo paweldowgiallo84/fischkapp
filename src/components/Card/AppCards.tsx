@@ -9,7 +9,7 @@ interface AppCardsProps {
 }
 
 export const AppCards: React.FC<AppCardsProps> = ({ cards, setCards }) => {
-
+  
   return (
     <>
       {cards.length === 0 &&
