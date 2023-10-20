@@ -17,7 +17,7 @@ export const AppCards: React.FC<AppCardsProps> = ({ cards, setCards }) => {
       {cards.map((card, index) => {
         return (
           <AppCard 
-            key={index}
+            key={card.id}
             index={index}
             id={card.id}
             question={card.cardQuestion}

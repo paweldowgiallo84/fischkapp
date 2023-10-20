@@ -8,15 +8,14 @@ interface AppCardNormalProps {
     question: string;
     answer: string;
     index: number;
-    cards: CardData[];
-    runEditMode: () => void;
+    cards: CardData[];    
 }
 
-export const AppCardNormal: React.FC<AppCardNormalProps> = ({question, cards, runEditMode }) => {
+export const AppCardNormal: React.FC<AppCardNormalProps> = ({question, cards}) => {
     return (
         <>
             <div className={styles.card}>
-                <img src={editIcon} className={styles.editIcon} alt="edit icon" onClick={() => runEditMode()} />
+                <img src={editIcon} className={styles.editIcon} alt="edit icon" />
                 <p className={styles.cardContent}>{question}</p>
             </div>
         </>

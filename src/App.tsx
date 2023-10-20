@@ -14,18 +14,7 @@ export interface CardData {
 
 function App() {
 
-  const [cards, setCards] = useState<CardData[]>([
-    { 
-      id: 0,     
-      cardQuestion: 'kto',      // editMode WIP
-      cardAnswer: 'ja'
-    },
-    { 
-      id: 1,     
-      cardQuestion: 'dlaczego',      // editMode WIP
-      cardAnswer: 'bo tak'
-    }
-  ])
+  const [cards, setCards] = useState<CardData[]>([])
   const [isCardAdding, setIsCardAdding] = useState<boolean>(false)
 
   return (
