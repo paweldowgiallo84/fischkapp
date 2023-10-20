@@ -7,13 +7,12 @@ interface AppCardProps {
     id: number;
     question: string;
     answer: string;
-    index: number;
-    key: number;
+    index: number;    
     cards: CardData[];
     setCards: (cards: CardData[]) => void;
 }
 
-export const AppCard: React.FC<AppCardProps> = ({id, question, answer, index, key, cards, setCards }) => {  
+export const AppCard: React.FC<AppCardProps> = ({id, question, answer, index, cards, setCards }) => {  
     const [editMode, setEditMode] = useState<boolean>(false)
 
     // console.log(key)   
@@ -21,8 +20,7 @@ export const AppCard: React.FC<AppCardProps> = ({id, question, answer, index, ke
     return (
         <>
             {!editMode && 
-            <AppCardNormal
-            key={key}                
+            <AppCardNormal                          
             id={id}
             question={question}
             answer={answer}

@@ -3,4 +3,12 @@
   height: 755px;
   margin: 1% auto;
   background: #f1f2f3;
+  overflow: hidden;
+  overflow-y: scroll;
 }
+
+.layout::-webkit-scrollbar {  
+  width: 0;
+  height: 0;
+}
+
