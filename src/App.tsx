@@ -27,7 +27,7 @@ function App() {
   return (
     <AppLayout>
       <AppHeader cardsAmount={cards.length} addCard={() => setIsCardAdding(true)} />
-      {isCardAdding ? <AppAddCard cancelAddCard={() => setIsCardAdding(false)} cards={cards} onAddCard={addNewCard} setCards={setCards} /> : null}
+      {isCardAdding ? <AppAddCard cancelAddCard={() => setIsCardAdding(false)} cards={cards} onAddCard={addNewCard} /> : null}
       <AppCards cards={cards} setCards={setCards}/>
     </AppLayout>
   );
