@@ -13,8 +13,11 @@ export interface CardData {
 }
 
 function App() {
-
-  const [cards, setCards] = useState<CardData[]>([])
+// pre-constructed board according to the requirements of the task
+  const [cards, setCards] = useState<CardData[]>([  
+    {id: 1, cardQuestion: 'Kto?', cardAnswer: 'Ja!'},
+    {id: 2, cardQuestion: 'Dlaczego?', cardAnswer: 'Dlatego!'},
+  ])
   const [isCardAdding, setIsCardAdding] = useState<boolean>(false)
 
   return (
