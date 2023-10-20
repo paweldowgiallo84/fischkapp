@@ -1,41 +1,27 @@
-import { useState } from "react";
 import { AppHeader } from "./components/Header/AppHeader";
 import { AppLayout } from "./components/AppLayout";
+import { AppAddCard } from "./components/AddCard/AppAddCard";
+import { AppCard } from "./components/Card/AppCard";
 import './App.css'
 
-interface CardData {
-  cardQuestion: string
+import { useState } from "react";
+
+export interface CardData {
+  cardId: number;
+  cardQuestion: string;
   cardAnswer: string
 }
 
-const cardData: CardData[] = [{
-  cardQuestion: 'W celu uniknięcia efektu Rosenthala można zastosować procedurę:',
-  cardAnswer: 'podwójnie ślepej próby'
-},
-{
-  cardQuestion: "Skala odpowiedzi typu dyferencjał semantyczny nazywana jest inaczej:",
-  cardAnswer: "skala Osgooda"
-},
-{
-  cardQuestion: "Skala odpowiedzi typu dyferencjał semantyczny nazywana jest inaczej:",
-  cardAnswer: "skala Osgooda"
-}
-]
-
 function App() {
 
-  const [cards, setCards] = useState(cardData)
-  const [isCardAdding, setIsCardAdding] = useState(false)
-
-  const addingCard = () => {
-    setIsCardAdding(true)
-    console.log(cards)
-    console.log(isCardAdding)
-  }
+  const [cards, setCards] = useState<CardData[]>([])
+  const [isCardAdding, setIsCardAdding] = useState(false)  
 
   return (
     <AppLayout>
-      <AppHeader cardsAmount={cards.length} addCard={() => addingCard()} />    
+      <AppHeader cardsAmount={cards.length} addCard={() => setIsCardAdding(true)} />
+      {isCardAdding ? <AppAddCard cancelAddCard={() => setIsCardAdding(false)} cards={cards} setCards={setCards}/> : null}
+      <AppCard cards={cards}/>
     </AppLayout>
   );
 }
