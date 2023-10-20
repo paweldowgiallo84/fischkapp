@@ -1,0 +1,67 @@
+.card {
+    position: relative;
+    width: 343px;
+    height: 188px;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    margin: 20px auto;
+}
+
+.deleteIcon {
+    position: absolute;
+    right: 0;
+}
+
+.questionValue {
+    position: absolute;
+    top: 28px;
+    left: 15px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+}
+
+.errorMsg {
+    color: rgb(198, 29, 29);
+    position: absolute;
+    top: 100px;
+    left: 15px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+}
+
+.cardInput {
+    width: 315px;
+    height: 40px;
+    margin: 50px 14px;
+    padding: 10px;
+    border: 1px solid var(--border);
+}
+
+.cardBtns {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 14px;
+}
+
+.cardBtns button {
+    width: 110px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    padding: 10px 12px;
+    border-radius: 22px;
+    border: none;
+}
+
+.cancelBackBtn {
+    background-color: var(--white);
+    margin-right: 7px;
+}
+
+.nextSaveBtn {
+    color: var(--white);
+    background-color: var(--accent);
+}
