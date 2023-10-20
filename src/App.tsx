@@ -20,10 +20,14 @@ function App() {
   ])
   const [isCardAdding, setIsCardAdding] = useState<boolean>(false)
 
+  const addNewCard = (newCard: CardData) => {
+    setCards(prevCards => [newCard, ...prevCards])
+  }
+
   return (
     <AppLayout>
       <AppHeader cardsAmount={cards.length} addCard={() => setIsCardAdding(true)} />
-      {isCardAdding ? <AppAddCard cancelAddCard={() => setIsCardAdding(false)} cards={cards} setCards={setCards} /> : null}
+      {isCardAdding ? <AppAddCard cancelAddCard={() => setIsCardAdding(false)} cards={cards} onAddCard={addNewCard} setCards={setCards} /> : null}
       <AppCards cards={cards} setCards={setCards}/>
     </AppLayout>
   );

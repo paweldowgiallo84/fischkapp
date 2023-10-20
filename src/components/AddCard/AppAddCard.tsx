@@ -7,9 +7,10 @@ interface AppAddCardProps {
   cancelAddCard: () => void;
   cards: CardData[];
   setCards: (cards: CardData[]) => void
+  onAddCard: (newCard: CardData) => void
 }
 
-export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, setCards }) => {
+export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, onAddCard, setCards }) => {
   const [frontSide, setFrontSide] = useState<boolean>(true)
   const [question, setQuestion] = useState<string>('')
   const [answer, setAnswer] = useState<string>('')
@@ -29,14 +30,16 @@ export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, se
     if (question === '' || answer === '') { setErrorMsg('Błędnie wypełniona fiszka... popraw dane.') }
     else {
       const newCard = { id: cards.length + setUId(1, 100), cardQuestion: question, cardAnswer: answer }
-      const newCards = [...cards, newCard]
-      setCards(newCards)
+      onAddCard(newCard)
       setQuestion('')
       setAnswer('')
       setErrorMsg('')
       cancelAddCard()
     }
   }
+
+
+
 
   return (
     <>
