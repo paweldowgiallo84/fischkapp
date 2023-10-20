@@ -1,13 +1,13 @@
 import { AppHeader } from "./components/Header/AppHeader";
 import { AppLayout } from "./components/AppLayout";
 import { AppAddCard } from "./components/AddCard/AppAddCard";
-import { AppCard } from "./components/Card/AppCard";
+import { AppCards } from "./components/Card/AppCards";
 import './App.css'
 
 import { useState } from "react";
 
-export interface CardData {
-  cardId: number;
+export interface CardData {  
+  id: number
   cardQuestion: string;
   cardAnswer: string
 }
@@ -15,13 +15,13 @@ export interface CardData {
 function App() {
 
   const [cards, setCards] = useState<CardData[]>([])
-  const [isCardAdding, setIsCardAdding] = useState(false)  
+  const [isCardAdding, setIsCardAdding] = useState<boolean>(false)
 
   return (
     <AppLayout>
       <AppHeader cardsAmount={cards.length} addCard={() => setIsCardAdding(true)} />
-      {isCardAdding ? <AppAddCard cancelAddCard={() => setIsCardAdding(false)} cards={cards} setCards={setCards}/> : null}
-      <AppCard cards={cards}/>
+      {isCardAdding ? <AppAddCard cancelAddCard={() => setIsCardAdding(false)} cards={cards} setCards={setCards} /> : null}
+      <AppCards cards={cards} setCards={setCards}/>
     </AppLayout>
   );
 }

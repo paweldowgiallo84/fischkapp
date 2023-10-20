@@ -22,12 +22,3 @@
 body {
   background: #373737;
 }
-
-.emptyCard {  
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 18px;
-  color: var(--typo);
-  margin-top: 27px;
-  margin-left: 16px;
-}
