@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  background: var(--white);
+  padding: 10px 16px;
+}
+
+.logoAndCounter {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.cardCounter { 
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21px;
+  color: var(--typoraphy);
+}
+
+.addBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+.addBtn img {
+  width: 24px;
+  height: 24px;
+}

@@ -1,9 +1,33 @@
+:root {
+  --white: #ffffff;
+  --background: #f1f2f3;
+  --accent: #161616;
+  --typo: #b6b6b6;
+  --border: #ebebec;
+  --tyopgraphy: #1C1C1C;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('./fonts/Lexend.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Lexend";
 }
 
 body {
   background: #373737;
+}
+
+.emptyCard {  
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--typo);
+  margin-top: 27px;
+  margin-left: 16px;
 }
