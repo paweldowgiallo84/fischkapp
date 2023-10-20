@@ -11,7 +11,7 @@ interface AppCardNormalProps {
     cards: CardData[];    
 }
 
-export const AppCardNormal: React.FC<AppCardNormalProps> = ({question, cards}) => {
+export const AppCardNormal: React.FC<AppCardNormalProps> = ({question}) => {
     return (
         <>
             <div className={styles.card}>

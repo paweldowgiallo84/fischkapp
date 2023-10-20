@@ -12,7 +12,7 @@ interface AppCardProps {
     setCards: (cards: CardData[]) => void;
 }
 
-export const AppCard: React.FC<AppCardProps> = ({id, question, answer, index, key, cards, setCards, }) => {    
+export const AppCard: React.FC<AppCardProps> = ({id, question, answer, index, key, cards }) => {    
 
     return (
         <>
