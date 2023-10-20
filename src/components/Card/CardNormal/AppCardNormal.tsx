@@ -13,11 +13,11 @@ interface AppCardNormalProps {
 }
 
 export const AppCardNormal: React.FC<AppCardNormalProps> = ({ question, answer, runEditMode }) => {
-    const [isFliped, setIsFliped] = useState<boolean>(false)
+    const [isFliped, setIsFliped] = useState<boolean>(true)
     
     return (
         <>
-            <div className={styles.card} onClick={() => setIsFliped(current => !current)}>
+            <div className={`${styles.card} ${isFliped ? styles.fliped : styles.notFliped}`} onClick={() => setIsFliped(current => !current)}>
                 <img src={editIcon} className={styles.editIcon} alt="edit icon" onClick={() => runEditMode()}/>
                 <p className={styles.cardContent}>{isFliped ? question : answer}</p>
             </div>

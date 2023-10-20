@@ -8,6 +8,14 @@
     margin: 20px auto;
 }
 
+.card.fliped {
+    animation: fliped 0.8s ease-in-out;
+}
+
+.card.notFliped {
+    animation: notFliped 0.8s ease-in-out;
+}
+
 .editIcon {
     position: absolute;   
     right: 0;
@@ -20,4 +28,22 @@
     align-items: center;
     text-align: center;
     padding: 41px 26px;    
+}
+
+@keyframes fliped {
+    from {
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes notFliped {
+    from {
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(0deg);
+    }
 }

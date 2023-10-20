@@ -5,12 +5,11 @@ import { CardData } from '../../App'
 
 interface AppAddCardProps {
   cancelAddCard: () => void;
-  cards: CardData[];
-  setCards: (cards: CardData[]) => void
+  cards: CardData[];  
   onAddCard: (newCard: CardData) => void
 }
 
-export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, onAddCard, setCards }) => {
+export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, onAddCard }) => {
   const [frontSide, setFrontSide] = useState<boolean>(true)
   const [question, setQuestion] = useState<string>('')
   const [answer, setAnswer] = useState<string>('')
