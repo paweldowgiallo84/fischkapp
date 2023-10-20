@@ -1,7 +1,8 @@
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import deleteIcon from '../../images/deleteIcon.svg'
 import styles from './AppAddCard.module.css'
 import { CardData } from '../../App'
+import { number } from 'prop-types';
 
 interface AppAddCardProps {
   cancelAddCard: () => void;
@@ -19,10 +20,16 @@ export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, se
     setFrontSide(cardState)
   }
 
+  const setUId = (min: number, max: number) => {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min) + min)
+  }
+
   const addCardData = () => {
     if (question === '' || answer === '') { setErrorMsg('Błędnie wypełniona fiszka... popraw dane.') }
     else {
-      const newCard = {id: cards.length, cardQuestion: question, cardAnswer: answer }
+      const newCard = { id: cards.length + setUId(1, 100), cardQuestion: question, cardAnswer: answer }
       const newCards = [...cards, newCard]
       setCards(newCards)
       setQuestion('')
@@ -34,14 +41,14 @@ export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, se
 
   return (
     <>
-      {frontSide ?     
+      {frontSide ?
         <div className={`${styles.card} ${frontSide ? '' : styles.notFlip}`}>
           <input type="text" className={styles.cardInput} id='inputQuestion' placeholder={question} onChange={e => setQuestion(e.target.value)} value={question} />
           <div className={styles.cardBtns}>
             <button className={styles.cancelBackBtn} onClick={() => cancelAddCard()} >Cancel</button>
             <button className={styles.nextSaveBtn} onClick={() => flipCardSide(false)} >Next</button>
           </div>
-        </div>        
+        </div>
 
         :
 
