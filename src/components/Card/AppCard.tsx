@@ -9,8 +9,6 @@ interface AppCardProps {
 
 export const AppCard: React.FC<AppCardProps> = ({ cards }) => {
 
-cards.length === 0 ? console.log('card length = 0 ',cards.length) : console.log('card is added', cards.length)
-
   return (
     <>
       {cards.length === 0 ?
