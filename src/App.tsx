@@ -26,12 +26,7 @@ function App() {
         }
         return respons.json()
       })
-      .then(data => {
-        data.forEach((card: CardData) => {
-          _id: card._id;
-          front: card.front;
-          back: card.back;
-        });
+      .then(data => {    
         setCards(data)
       })
       .catch(error => {

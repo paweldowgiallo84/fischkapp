@@ -28,7 +28,7 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, _id, index, sto
             setErrorMsg('')            
             const newCards = cards.map((card) => {
                 if (card._id === _id) return {
-                    ...card, cardQuestion: question, cardAnswer: answer
+                    ...card, front: question, back: answer
                 }; else return card
             })
             setCards(newCards)
