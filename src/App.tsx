@@ -1,24 +1,39 @@
+import { useEffect, useState } from "react";
 import { AppHeader } from "./components/Header/AppHeader";
 import { AppLayout } from "./components/AppLayout";
 import { AppAddCard } from "./components/AddCard/AppAddCard";
 import { AppCards } from "./components/Card/AppCards";
 import './App.css'
 
-import { useState } from "react";
+const FISCHKAPP_URL = 'https://training.nerdbord.io/api/v1/fischkapp/flashcards'
 
-export interface CardData {  
-  id: number
-  cardQuestion: string;
-  cardAnswer: string
+export interface CardData {
+  _id: string;
+  // id: string;
+  front: string;
+  back: string
 }
 
 function App() {
-// pre-constructed board according to the requirements of the task
-  const [cards, setCards] = useState<CardData[]>([  
-    {id: 1, cardQuestion: 'Kto?', cardAnswer: 'Ja!'},
-    {id: 2, cardQuestion: 'Dlaczego?', cardAnswer: 'Dlatego!'},
-  ])
+  const [cards, setCards] = useState<CardData[]>([])
   const [isCardAdding, setIsCardAdding] = useState<boolean>(false)
+
+  useEffect(() => {
+    fetch(FISCHKAPP_URL)
+      .then(respons => {
+        if (!respons.ok) {
+          throw new Error('Server not responding')
+        }
+        return respons.json()
+      })
+      .then(data => {    
+        setCards(data)
+      })
+      .catch(error => {
+        console.error('Error: ', error)
+      })
+  }, [isCardAdding])
+
 
   const addNewCard = (newCard: CardData) => {
     setCards(prevCards => [newCard, ...prevCards])
@@ -28,7 +43,7 @@ function App() {
     <AppLayout>
       <AppHeader cardsAmount={cards.length} addCard={() => setIsCardAdding(true)} />
       {isCardAdding ? <AppAddCard cancelAddCard={() => setIsCardAdding(false)} cards={cards} onAddCard={addNewCard} /> : null}
-      <AppCards cards={cards} setCards={setCards}/>
+      <AppCards cards={cards} setCards={setCards} />
     </AppLayout>
   );
 }

@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import deleteIcon from '../../images/deleteIcon.svg'
 import styles from './AppAddCard.module.css'
 import { CardData } from '../../App'
+import { v4 as uuidv4 } from 'uuid';
 
 interface AppAddCardProps {
   cancelAddCard: () => void;
-  cards: CardData[];  
+  cards: CardData[];
   onAddCard: (newCard: CardData) => void
 }
 
@@ -19,16 +20,13 @@ export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, on
     setFrontSide(cardState)
   }
 
-  const setUId = (min: number, max: number) => {
-    min = Math.ceil(min)
-    max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min) + min)
-  }
+  const setUuId: string = uuidv4()
+
 
   const addCardData = () => {
     if (question === '' || answer === '') { setErrorMsg('Błędnie wypełniona fiszka... popraw dane.') }
     else {
-      const newCard = { id: cards.length + setUId(1, 100), cardQuestion: question, cardAnswer: answer }
+      const newCard = { _id: setUuId, front: question, back: answer }
       onAddCard(newCard)
       setQuestion('')
       setAnswer('')

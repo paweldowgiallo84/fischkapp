@@ -18,11 +18,11 @@ export const AppCards: React.FC<AppCardsProps> = ({ cards, setCards }) => {
       {cards.map((card, index) => {
         return (
           <AppCard 
-            key={card.id}
+            key={card._id}
             index={index}
-            id={card.id}
-            question={card.cardQuestion}
-            answer={card.cardAnswer}
+            _id={card._id}
+            front={card.front}
+            back={card.back}
             cards={cards}
             setCards={setCards}
           />
