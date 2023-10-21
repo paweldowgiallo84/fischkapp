@@ -1,42 +1,54 @@
 import React, { useState } from 'react'
 import deleteIcon from '../../images/deleteIcon.svg'
 import styles from './AppAddCard.module.css'
-import { CardData } from '../../App'
-import { v4 as uuidv4 } from 'uuid';
+import { FISCHKAPP_URL, URL_AUTH_TOKEN } from '../../App';
 
 interface AppAddCardProps {
-  cancelAddCard: () => void;
-  cards: CardData[];
-  onAddCard: (newCard: CardData) => void
+  cancelAddCard: () => void;  
 }
 
-export const AppAddCard: React.FC<AppAddCardProps> = ({ cards, cancelAddCard, onAddCard }) => {
+export const AppAddCard: React.FC<AppAddCardProps> = ({ cancelAddCard }) => {
   const [frontSide, setFrontSide] = useState<boolean>(true)
   const [question, setQuestion] = useState<string>('')
   const [answer, setAnswer] = useState<string>('')
   const [errorMsg, setErrorMsg] = useState<string>('')
 
-  const flipCardSide = (cardState: boolean) => {
-    setFrontSide(cardState)
-  }
-
-  const setUuId: string = uuidv4()
-
-
+  
   const addCardData = () => {
     if (question === '' || answer === '') { setErrorMsg('Błędnie wypełniona fiszka... popraw dane.') }
     else {
-      const newCard = { _id: setUuId, front: question, back: answer }
-      onAddCard(newCard)
-      setQuestion('')
-      setAnswer('')
-      setErrorMsg('')
-      cancelAddCard()
+      const data = { front: question, back: answer }
+
+      fetch(FISCHKAPP_URL, {
+        method: 'POST',        
+        headers: {
+          'Authorization': URL_AUTH_TOKEN,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(respons => {
+          if (!respons.ok) {
+            throw new Error('Server not responding')
+          }
+          return respons.json()
+        })
+        .then(data => {
+          console.log('Send data: ', data)
+          setQuestion('')
+          setAnswer('')
+          setErrorMsg('')
+          cancelAddCard()
+        })
+        .catch(Error => {
+          console.error('Error: ', Error)
+        })
     }
   }
 
-
-
+  const flipCardSide = (cardState: boolean) => {
+    setFrontSide(cardState)
+  }
 
   return (
     <>
