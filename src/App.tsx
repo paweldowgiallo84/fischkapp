@@ -9,7 +9,7 @@ export const FISCHKAPP_URL = 'https://training.nerdbord.io/api/v1/fischkapp/flas
 export const URL_AUTH_TOKEN = 'secret_token'
 
 export interface CardData {
-  _id: string;  
+  _id: string;
   front: string;
   back: string
 }
@@ -26,7 +26,7 @@ function App() {
         }
         return respons.json()
       })
-      .then(data => {    
+      .then(data => {
         setCards(data)
       })
       .catch(error => {

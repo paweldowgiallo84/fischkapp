@@ -1,7 +1,9 @@
 .card {
+    display: flex;
+    flex-direction: column;
     position: relative;
     width: 343px;
-    height: 188px;
+    min-height: 188px;
     background-color: var(--white);
     border: 1px solid var(--border);
     border-radius: 15px;
@@ -17,13 +19,13 @@ animation: deleteCard 0.7s ease-in-out;
     right: 0;
 }
 
-.questionValue {
-    position: absolute;
-    top: 28px;
-    left: 15px;
+.questionValue {  
+    width: 285px;
+    min-height: 30px; 
     font-size: 12px;
     font-weight: 400;
     line-height: 15px;
+    margin: 18px 40px 0 15px;
 }
 
 .errorMsg {
@@ -37,17 +39,23 @@ animation: deleteCard 0.7s ease-in-out;
 }
 
 .cardInput {
-    width: 315px;
-    height: 40px;
-    margin: 50px 14px;
+    width: 315px;    
+    min-height: 20px;
+    margin: 15px 14px 50px;
     padding: 10px;
     border: 1px solid var(--border);
+    resize: none;
+}
+
+.cardInput.frontSide {
+    margin-top: 64px;
 }
 
 .cardBtns {
     display: flex;
     justify-content: flex-end;
     margin-right: 14px;
+    margin-bottom: 14px;
 }
 
 .cardBtns button {

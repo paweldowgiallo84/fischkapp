@@ -98,7 +98,7 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, _id, index, sto
         <>
             {frontSide ?
                 <div className={`${styles.card} ${frontSide ? '' : styles.notFlip}`}>
-                    <input type="text" className={styles.cardInput} id='inputQuestion' placeholder={question || cards[index].front}
+                    <textarea className={`${styles.cardInput} ${frontSide ? styles.frontSide : ''}`} id='inputQuestion' placeholder={question || cards[index].front}
                         onChange={e => setQuestion(e.target.value)} value={question} />
                     <div className={styles.cardBtns}>
                         <button className={styles.cancelBackBtn} onClick={() => stopEditMode()} >Cancel</button>
@@ -111,7 +111,7 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, _id, index, sto
                 <div className={`${styles.card} ${frontSide ? styles.flip : ''} ${!isDeleting ? '' : styles.cardDelete}`}>
                     <img src={deleteIcon} className={styles.deleteIcon} alt="deleteIcon" onClick={() => deleteCardData(_id)} />
                     <p className={styles.questionValue}>{question}</p>
-                    <input type="text" className={styles.cardInput} id='inputAnswer' placeholder={answer || cards[index].back}
+                    <textarea className={styles.cardInput} id='inputAnswer' placeholder={answer || cards[index].back}
                         onChange={e => setAnswer(e.target.value)} value={answer} />
                     <p className={styles.errorMsg}>{errorMsg}</p>
                     <div className={styles.cardBtns}>
