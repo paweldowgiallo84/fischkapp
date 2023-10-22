@@ -15,8 +15,6 @@ interface AppCardProps {
 export const AppCard: React.FC<AppCardProps> = ({_id, front, back, index, cards, setCards }) => {  
     const [editMode, setEditMode] = useState<boolean>(false)
 
-    // console.log(key)   
-
     return (
         <>
             {!editMode && 
