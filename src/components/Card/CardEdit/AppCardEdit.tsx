@@ -68,12 +68,30 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, _id, index, sto
 
     const deleteCardData = (_id: string) => {
         setIsDeleting(true)
-        setTimeout(() => {
-            const newCards = cards.filter(card => card._id !== _id)
-            setCards(newCards)
-            setIsDeleting(false)
-            stopEditMode()
-        }, 600)
+        const newCards = cards.filter(card => card._id !== _id)
+        setCards(newCards)
+
+        fetch(`${FISCHKAPP_URL}/${_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': URL_AUTH_TOKEN,
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Server not responding')
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log('Card deletet from server: ', data)
+                setIsDeleting(false)
+                stopEditMode()
+            })
+            .catch(Error => {
+                console.error("Error: ", Error)
+                setErrorMsg('Failed to delete card. Please try again.')
+            })
     }
 
     return (
