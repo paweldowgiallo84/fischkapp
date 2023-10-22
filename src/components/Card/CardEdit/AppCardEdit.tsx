@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { CardData } from "../../../App"
+import { CardData, FISCHKAPP_URL, URL_AUTH_TOKEN } from "../../../App"
 import styles from './AppCardEdit.module.css'
 import deleteIcon from '../../../images/deleteIcon.svg'
 
@@ -23,31 +23,57 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, _id, index, sto
     }
 
     const editCardData = (_id: string) => {
-        if (question === '' || answer === '') { setErrorMsg('Błędnie wypełniona fiszka... popraw dane.') }
+        if (question === '' || answer === '') { setErrorMsg('Incorrectly filled in fiche... Correct data.') }
         else {
-            setErrorMsg('')            
+            setErrorMsg('')
             const newCards = cards.map((card) => {
                 if (card._id === _id) return {
                     ...card, front: question, back: answer
                 }; else return card
             })
             setCards(newCards)
-            setQuestion('')
-            setAnswer('')
-            setErrorMsg('')
-            stopEditMode()
-        }
-    } 
-    const deleteCardData = (_id: string) => {
-            setIsDeleting(true)
-            setTimeout(() => {
-                const newCards = cards.filter(card => card._id !== _id)
-                setCards(newCards)
-                setIsDeleting(false)
-                stopEditMode()
-            }, 600)
-        
+            const data = {
+                id: _id,
+                front: question,
+                back: answer
+            }
 
+            fetch(`${FISCHKAPP_URL}/${_id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': URL_AUTH_TOKEN,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Server not responding')
+                    }
+                    return response.json()
+                })
+                .then(data => {
+                    console.log('Update data send to server: ', data)
+                    setQuestion('')
+                    setAnswer('')
+                    setErrorMsg('')
+                    stopEditMode()
+                })
+                .catch(Error => {
+                    console.error("Error: ", Error)
+                    setErrorMsg('Failed to update card. Please try again.')
+                })
+        }
+    }
+
+    const deleteCardData = (_id: string) => {
+        setIsDeleting(true)
+        setTimeout(() => {
+            const newCards = cards.filter(card => card._id !== _id)
+            setCards(newCards)
+            setIsDeleting(false)
+            stopEditMode()
+        }, 600)
     }
 
     return (

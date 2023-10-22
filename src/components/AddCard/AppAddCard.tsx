@@ -15,7 +15,7 @@ export const AppAddCard: React.FC<AppAddCardProps> = ({ cancelAddCard }) => {
 
   
   const addCardData = () => {
-    if (question === '' || answer === '') { setErrorMsg('Błędnie wypełniona fiszka... popraw dane.') }
+    if (question === '' || answer === '') { setErrorMsg('Incorrectly filled in fiche... Correct data.') }
     else {
       const data = { front: question, back: answer }
 
@@ -42,6 +42,7 @@ export const AppAddCard: React.FC<AppAddCardProps> = ({ cancelAddCard }) => {
         })
         .catch(Error => {
           console.error('Error: ', Error)
+          setErrorMsg('Failed to add card. Please try again.')
         })
     }
   }
