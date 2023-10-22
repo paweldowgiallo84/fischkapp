@@ -42,7 +42,7 @@ export const AppCardEdit: React.FC<AppCardEdtiProps> = ({ cards, _id, index, sto
                 method: 'PATCH',
                 headers: {
                     'Authorization': URL_AUTH_TOKEN,
-                    'Content-Type': 'application/ json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             })
