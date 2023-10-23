@@ -4,13 +4,6 @@ import '@testing-library/jest-dom'
 import  App from './App'
 import { server } from "./mock/browser";
 
-// jest.mock('./images/logo.svg', () => ({
-//     ReactComponent: 'svg',
-//   }));
-// jest.mock('./images/addBtn.svg', () => ({
-//     ReactComponent: 'svg',
-//   }));
-
 // Start server
 beforeAll(() => {
     server.listen()

@@ -1,22 +1,26 @@
-module.exports = {
-    // ... other Jest configurations
-    extensionsToTreatAsEsm: ['.ts', '.tsx', '.jsx'],
+import type { Config } from 'jest'
 
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
-
-    moduleNameMapper: {        
-        '\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-            'identity-obj-proxy',
-        '\\.(svg)$': 'jest-svg-transformer',
-        '^.+\\.(css|less)$': '<rootDir>/mockFiles/cssstub.js'
-    },
-
-    testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
-
-    transform: {
-        "^.+\\.(js|jsx|ts|cjs|mjs|esm)$": "babel-jest",
-        "^.+\\.tsx?$": "ts-jest"
-    },   
-
-    testEnvironment: 'jsdom',
-};
+export default {
+  rootDir: __dirname,
+  setupFilesAfterEnv: ['<rootDir>/jest.config.ts'],
+  setupFiles: ['<rootDir>/jest.polyfills.ts'],
+  transform: {
+    '^.+\\.tsx?$': '@swc/jest',
+  },
+  moduleNameMapper: {    
+    "\\.(svg)$": '<rootDir>/mock/mock.ts',
+    '\\.css$': '<rootDir>/mock/mock.ts',
+  },
+  testEnvironmentOptions: {
+    /**
+     * @note Opt-out from JSDOM using browser-style resolution
+     * for dependencies. This is simply incorrect, as JSDOM is
+     * not a browser, and loading browser-oriented bundles in
+     * Node.js will break things.
+     *
+     * Consider migrating to a more modern test runner if you
+     * don't want to deal with this.
+     */
+    customExportConditions: [''],
+  },
+} satisfies Config
