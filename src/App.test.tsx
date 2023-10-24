@@ -23,6 +23,10 @@ afterAll(() => {
 describe('App', () => {
     render(<App />)
 
+    it('Show "Add your first flashcard" when ther is no cards added', () => {
+        const noCards = screen.getByText('Add your first flashcard');
+        expect(noCards).toBeInTheDocument()
+    })
     
 
 })

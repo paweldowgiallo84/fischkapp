@@ -6,11 +6,14 @@ export default {
   setupFiles: ['<rootDir>/jest.polyfills.ts'],
   transform: {
     '^.+\\.tsx?$': '@swc/jest',
+    "^.+\\.svg$": "<rootDir>/src/svgTransform.cjs"
   },
   moduleNameMapper: {    
-    "\\.(svg)$": '<rootDir>/mock/mock.ts',
-    '\\.css$': '<rootDir>/mock/mock.ts',
+    // "\\.(svg)$": '<rootDir>/mock/mock.ts',
+    "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules",
   },
+  globals: { fetch},
+  testEnvironment: 'jsdom',
   testEnvironmentOptions: {
     /**
      * @note Opt-out from JSDOM using browser-style resolution
