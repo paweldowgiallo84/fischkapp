@@ -55,7 +55,7 @@ export const AppAddCard: React.FC<AppAddCardProps> = ({ cancelAddCard }) => {
     <>
       {frontSide ?
         <div className={`${styles.card} ${frontSide ? '' : styles.notFlip}`}>
-          <input type="text" className={styles.cardInput} id='inputQuestion' placeholder={question} onChange={e => setQuestion(e.target.value)} value={question} />
+          <input type="text" className={styles.cardInput} data-testid="question" placeholder={question} onChange={e => setQuestion(e.target.value)} value={question} />
           <div className={styles.cardBtns}>
             <button className={styles.cancelBackBtn} onClick={() => cancelAddCard()} >Cancel</button>
             <button className={styles.nextSaveBtn} onClick={() => flipCardSide(false)} >Next</button>
@@ -67,9 +67,9 @@ export const AppAddCard: React.FC<AppAddCardProps> = ({ cancelAddCard }) => {
         <div className={`${styles.card} ${frontSide ? styles.flip : ''}`}>
           <img src={deleteIcon} className={styles.deleteIcon} alt="deleteIcon" />
           <p className={styles.questionValue}>{question}</p>
-          <input type="text" className={styles.cardInput} id='inputAnswer' placeholder={answer} onChange={e => setAnswer(e.target.value)}
+          <input type="text" title='inputAnswer' className={styles.cardInput} data-testid='answer' placeholder={answer} onChange={e => setAnswer(e.target.value)}
             value={answer} />
-          <p className={styles.errorMsg}>{errorMsg}</p>
+          <p className={styles.errorMsg} data-testid='errorMsg'>{errorMsg}</p>
           <div className={styles.cardBtns}>
             <button className={styles.cancelBackBtn} onClick={() => flipCardSide(true)}>Back</button>
             <button className={styles.nextSaveBtn} onClick={() => addCardData()}>Save</button>

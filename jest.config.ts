@@ -12,7 +12,7 @@ export default {
     // "\\.(svg)$": '<rootDir>/mock/mock.ts',
     "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules",
   },
-  globals: { fetch},
+  globals: { fetch, Request, Response},
   testEnvironment: 'jsdom',
   testEnvironmentOptions: {
     /**
